@@ -13,7 +13,7 @@ val place: String = "г.Москва"
 private val budget: String = "подробная информация с перечислением поставщиков и сумм для внутреннего пользования"
 
 // 5. Количество участников
-var participantsCount: Int = 100
+var participantsCount: Int = 0
 
 // 6. Длительность хакатона
 val duration: String = "2 дня"
