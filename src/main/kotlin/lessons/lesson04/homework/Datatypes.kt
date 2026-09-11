@@ -1,7 +1,5 @@
 package lessons.lesson04.homework
 
-import java.math.BigDecimal
-
 
 //часть 1
 val v1: Int = 42
