@@ -67,7 +67,6 @@ fun sumels(arg: Int) {
 
 fun main() {
 //1. Используя вложенный цикл реализовать таблицу умножения, как на картинке.
-    var a = 1
     for (i in 1..10) {
         for (j in 1..10) {
             print(i * j)
@@ -80,7 +79,7 @@ fun main() {
     sumArg(12)
     sumArg(4)
 //3.
-    factorial(5)
+    factorial(10)
 //4.
     sumEven(10)
 //5.
