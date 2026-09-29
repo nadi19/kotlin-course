@@ -1,10 +1,10 @@
 package lessons.lesson08.homeworks
-import lessons.lesson05.result
+
 import java.io.PrintStream
 import kotlin.text.replace
 
 fun main() {
-    System.setOut(PrintStream(System.out, true, "UTF-8"))
+    //System.setOut(PrintStream(System.out, true, "UTF-8"))
     converter("Это невозможно выполнить за один день")
     converter("Я не уверен в успехе этого проекта")
     converter("Произошла катастрофа на сервере")
@@ -17,6 +17,13 @@ fun main() {
     path("C:/Пользователи/Документы/report.txt")
     path("D:/good.themes/dracula.theme")
     abbreviations("Котлин лучший язык программирования")
+
+    capitalizeWords("kotlin ЭТО оченЬ удОбный ЯЗЫК")
+    encrypt("Kotlin")   // oKltni
+    decrypt("oKltni")   // Kotlin
+    encrypt("Hello")    // eHll o  -> "eHllo "
+    decrypt("eHllo ")   // Hello
+    printMultiplicationTable(9, 9)
 
 }
 
@@ -38,11 +45,21 @@ fun main() {
 
 fun converter(phrase: String) {
     val result = when {
-        phrase.contains("невозможно", true) -> phrase.replace("невозможно", "совершенно точно возможно, просто требует времени", true)
-        phrase. startsWith("Я не уверен", true) -> "$phrase, но моя интуиция говорит об обратном"
+        phrase.contains("невозможно", true) -> phrase.replace(
+            "невозможно",
+            "совершенно точно возможно, просто требует времени",
+            true
+        )
+
+        phrase.startsWith("Я не уверен", true) -> "$phrase, но моя интуиция говорит об обратном"
         phrase.contains("катастрофа", true) -> phrase.replace("катастрофа", "интересное событие", true)
-        phrase.endsWith("без проблем", ignoreCase = true) -> phrase.replace("без проблем", "с парой интересных вызовов на пути", ignoreCase = true)
-        !phrase.trim().contains(" ") -> "иногда $phrase, но не всегда"
+        phrase.endsWith("без проблем", ignoreCase = true) -> phrase.replace(
+            "без проблем",
+            "с парой интересных вызовов на пути",
+            ignoreCase = true
+        )
+
+        !phrase.trim().contains(" ") -> "Иногда $phrase, но не всегда"
         else -> phrase
     }
     println(result)
@@ -53,7 +70,7 @@ fun converter(phrase: String) {
 // (данные могут быть любыми, но формат всегда такой).
 // Извлеките отдельно дату и время из этой строки и сразу распечатай их по очереди. Используй indexOf или split для получения правой части сообщения.
 
-fun dateExtraction (log: String) {
+fun dateExtraction(log: String) {
     val words = log.split(" ")
     val date = words[5]
     val time = words[6]
@@ -62,7 +79,7 @@ fun dateExtraction (log: String) {
 
 }
 
-fun dateExtractiontwo (log: String) {
+fun dateExtractiontwo(log: String) {
     val ind = log.indexOf("->")
     val datatime = log.substring(ind + 2).trim()
     val part = datatime.split(" ")
@@ -97,7 +114,7 @@ fun email(mail: String) {
 
 fun path(file: String) {
     val dot = file.lastIndexOf("/")
-    val result = "${file.substring(dot +1)}"
+    val result = "${file.substring(dot + 1)}"
     println(result)
 }
 
@@ -115,4 +132,104 @@ fun abbreviations(abb: String) {
     println(result.uppercase())
 }
 
+//7. Все слова с большой буквы
+//Напишите метод, который преобразует строку из нескольких слов в строку, где каждое слово начинается с заглавной буквы а все остальные - строчные.
+// Используй перебор, анализ символов и замену букв на заглавную с помощью метода uppercase() для конкретной буквы.
 
+fun capitalizeWords(input: String) {
+    val words = input.split(" ")   // разбиваем на слова
+    var result = ""                // сюда собираем ответ
+
+    for (word in words) {                    // идём по каждому слову
+        if (word.isEmpty()) continue         // пустое — пропускаем
+
+        val first = word.substring(0, 1).uppercase()   // первая буква — заглавная
+        val rest = word.substring(1).lowercase()      // остальные — строчные
+
+        result += first + rest + " "         // приклеиваем слово и пробел
+    }
+
+    println(result.trim())   // trim убирает лишний пробел в конце
+}
+
+
+//8. Игра в разведчика
+//Напишите шифратор/дешифратор для строки. Шифровка производится путём замены двух соседних букв между собой: Kotlin шифруется в oKltni.
+// Дешифровка выполняется аналогично.
+//Если длина строки - нечётная, в конец добавляется символ пробела до начала шифрования.
+// Таким образом все шифрованные сообщения будут с чётной длинной. Должно получиться два публичных метода: encrypt() и decrypt() которые принимают строку и печатают результат в консоль.
+
+fun encrypt(input: String) {
+    var text = input
+
+    // Если длина нечётная — добавляем пробел, чтобы шло по парам
+    if (text.length % 2 != 0) {
+        text += " "
+    }
+
+    var result = ""
+    var i = 0
+
+    while (i < text.length) {
+        result += text[i + 1]   // сначала второй символ
+        result += text[i]       // потом первый
+        i += 2                  // прыгаем через 2
+    }
+
+    println(result)
+}
+
+fun decrypt(input: String) {
+    encrypt(input)   // то же самое: поменять дважды = вернуть исходное
+}
+
+//Таблица умножения
+//Напишите функцию, которая принимает два числа и выводит таблицу умножения, у которой в заголовках столбцов и строк находятся перемножаемые числа, а в перекрестии заголовка и столбца - результат перемножения. Важно: каждый столбец должен быть выровнен по правому краю с помощью шаблона с форматированием строк. Размер форматирования каждой строки нужно вычислять динамически для каждого столбца.
+// Результат должен быть похож на этот пример:
+
+fun printMultiplicationTable(rows: Int, cols: Int) {
+    println("Таблица умножения")
+    println()
+
+    // Шаг 1. Находим ширину каждого столбца
+    val widths = IntArray(cols + 1)   // массив ширин, +1 для первого столбца
+
+    widths[0] = rows.toString().length   // ширина столбца с номерами строк
+
+    for (col in 1..cols) {
+        var maxLen = col.toString().length   // минимум — длина заголовка
+        for (row in 1..rows) {
+            val product = row * col
+            val len = product.toString().length
+            if (len > maxLen) maxLen = len
+        }
+        widths[col] = maxLen
+    }
+
+    // Шаг 2. Собираем шаблон: %Nd для каждого столбца
+    var format = "%${widths[0]}d"    // первый столбец
+    for (col in 1..cols) {
+        format += " %${widths[col]}d"  // остальные с пробелом-разделителем
+    }
+
+    // Шаг 3. Печатаем заголовок: 0, 1, 2, 3, ...
+    var header = "0"                 // пустая ячейка угла — как 0
+    for (col in 1..cols) {
+        header += " $col"            // добавляем число
+    }
+    // Но чтобы выровнять — используем format
+    val headerValues = IntArray(cols + 1)
+    headerValues[0] = 0
+    for (col in 1..cols) headerValues[col] = col
+    println(format.format(*headerValues))
+
+    // Шаг 4. Печатаем строки таблицы
+    for (row in 1..rows) {
+        val values = IntArray(cols + 1)
+        values[0] = row
+        for (col in 1..cols) {
+            values[col] = row * col
+        }
+        println(format.format(*values))
+    }
+}
