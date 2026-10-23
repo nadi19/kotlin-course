@@ -1,4 +1,4 @@
-package lessons.lesson14
+package lessons.lesson14.homeworks
 
 //Событие: вечеринка. Создайте класс Party, который описывает вечеринку.
 // У него должны быть свойства location (String) и attendees (Int).

@@ -1,6 +1,7 @@
-package lessons.lesson14
+package lessons.lesson14.homeworks
 
-import lessons.lesson11.homeworks.first
+import lessons.lesson14.homeworks.Concert
+import lessons.lesson14.homeworks.Emotion
 
 fun main(){
     //1

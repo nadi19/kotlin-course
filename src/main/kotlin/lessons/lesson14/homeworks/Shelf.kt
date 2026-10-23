@@ -1,6 +1,4 @@
-package lessons.lesson14
-
-import kotlin.compareTo
+package lessons.lesson14.homeworks
 
 
 //Класс Shelf (Полка Стеллажа)

@@ -1,4 +1,4 @@
-package lessons.lesson14
+package lessons.lesson14.homeworks
 
 //Класс Rack (Стеллаж)
 //Характеристики:

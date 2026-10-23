@@ -1,4 +1,4 @@
-package lessons.lesson14
+package lessons.lesson14.homeworks
 
 
 //Природное явление: луна. Создайте объект Moon, который будет представлять Луну.
